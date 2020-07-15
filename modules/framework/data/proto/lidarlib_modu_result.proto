@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "geometry.proto";
+package lidar_algorithm.framework.data.proto;
+message LidarLibData {
+    int64 timestamp  = 1;
+    common.proto.AABB3Ds aabb3ds = 2;
+    common.proto.OBB3Ds obb3ds = 3;
+    common.proto.Clusters clusters = 4;
+    common.proto.PointCloud point_cloud = 5;
+}

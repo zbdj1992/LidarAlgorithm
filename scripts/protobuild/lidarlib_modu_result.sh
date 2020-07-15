@@ -1,0 +1,1 @@
+protoc-3.7.1 --proto_path=../../modules/framework/data/proto  --proto_path=../../modules/common/proto  --cpp_out=../../modules/framework/data/proto ../../modules/framework/data/proto/lidarlib_modu_result.proto

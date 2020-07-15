@@ -1,0 +1,14 @@
+https://blog.csdn.net/lizhengze1117/article/details/89034332
+linefit_ground_segmentation
+https://zhuanlan.zhihu.com/p/123220950?utm_source=wechat_session&utm_medium=social&utm_oi=878712745195864064
+1、Plane model segmentation (平面模型分割）
+2、Cylinder model segmentation（圆柱模型分割）
+3、Euclidean Cluster Extraction （欧几里德聚类提取）
+4、Region growing segmentation (区域生长分割)
+5、Color-based region growing segmentation (基于彩色信息区域蔓延分割）
+6、Min-cut Based Segmentation (基于最少切割的分割）
+7、Conditional Euclidean Clustering（有条件的欧几里德群聚类生成）
+8、Difference of Normals Based Segmentation (基于局部法线间不同值的分割）
+9、Clustering of Pointclouds into Supervoxels (把点云聚类为超体元）
+10、Identifying ground returns using ProgressiveMorphologicalFilter segementation (渐进型形态学过滤器分割）
+11、Filtering a PointCloud using ModelOutlierRemoval (基于移除模型离群值的方法过滤点云）

@@ -1,0 +1,16 @@
+load_pcd_path : ../modules/drivers/lidar/data/pcd_data_list0619
+data_cyclical_pattern : 1
+use_passthrough_filter : 1
+lidar_roi:
+    x:
+        left : -6.0
+        right : 6.0
+    y:
+        front : 0.15
+        after : 40.0
+    z:
+        down  : -2.0
+        up    : 3.0
+    intensity:
+            min  : 0.0
+            max  : 255.0

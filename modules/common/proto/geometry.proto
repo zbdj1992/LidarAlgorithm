@@ -1,0 +1,93 @@
+syntax = "proto3";
+package lidar_algorithm.common.proto;
+// A general 2D point. Its meaning and units depend on context, and must be
+// explained in comments.
+message Point2D {
+    double x = 1;
+    double y = 2;
+}
+
+// A general 3D point. Its meaning and units depend on context, and must be
+// explained in comments.
+message Point3D {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+}
+// A general polygon, points are counter clockwise
+message Polygon {
+  repeated Point3D points = 1;
+}
+message PointPair {
+    Point2D left = 1;
+    Point2D right = 2;
+}
+message PointTriple {
+    Point2D left = 1;
+    Point2D middle = 2;
+    Point2D right = 3;
+}
+message Box2D {
+    double x = 1;  //center x
+    double y = 2;  //center y
+    double height = 3;
+    double width = 4;
+}
+message Box3D {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+    double length = 4;
+    double width = 5;
+    double height = 6;
+}
+message PathLines{
+    repeated Point2D left_line_2 = 1; //detect  path
+    repeated Point2D left_line_1 = 2; //aeb path
+    repeated Point2D line = 3; //tracking path
+    repeated Point2D right_line_1 = 4;
+    repeated Point2D right_line_2 = 5;
+}
+message ObsOccuPathPct {
+    int32 left_pct = 1;
+    int32 right_pct = 2;
+}
+message PointXYZIL {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+    double intensity = 4;
+    uint32 label = 5; //1:ground point 0:overhead point
+}
+message PointCloud {
+    int64 timestamp  = 1;
+    repeated PointXYZIL points = 2;
+}
+message Quaternion {
+    double w = 1;
+    double x = 2;
+    double y = 3;
+    double z = 4;
+}
+message AABB3D {
+    Point3D min_point = 1;
+    Point3D max_point = 2;
+}
+message AABB3Ds {
+    repeated AABB3D aabb3ds = 1;
+}
+message OBB3D {
+    Point3D min_point = 1;
+    Point3D max_point = 2;
+    Point3D position = 3;
+    Quaternion quat = 4;
+}
+message OBB3Ds {
+    repeated OBB3D obb3ds = 1;
+}
+message Cluster {
+    repeated Point3D points = 1;
+}
+message Clusters {
+    repeated Cluster clusters = 1;
+}

@@ -1,0 +1,8 @@
+nor_k_search : 10
+reg_cluster_min_size : 5
+reg_cluster_max_size : 5000
+reg_number_neighbours : 10
+reg_smoothness_thr : 10.0
+reg_curvature_thr : 1.0
+use_cluster_merge : 1
+use_log_debug : 0
