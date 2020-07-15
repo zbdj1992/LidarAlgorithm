@@ -16,7 +16,7 @@
         b、文件夹中pcd文件，路径+文件名—>列表文件文件（ls /path/*.pcd>data_pcd_list）  
         c、更改配置 modules/drivers/lidar/conf/lidar_conf.yaml  
         load_pcd_path : ../modules/drivers/lidar/data/pcd_data_list0619  
-    * 3d show
+    * 3d show  
         a、修改配置文件 modules/pclshow3d/conf/pclshow_conf.yaml  
         cloud_show : 1 # 0不显示点云数据 1显示点云数据  
         aabb_show : 0  # 0不显示AABB 1显示AABB  
