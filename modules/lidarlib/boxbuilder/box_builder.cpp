@@ -22,7 +22,7 @@ bool BoxBuilder::boxbuild(const common::proto::Clusters& clusters,
     common::proto::OBB3D *obb3d;
     int clusters_num = clusters.clusters_size();
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_cluster(new pcl::PointCloud<pcl::PointXYZ>);
-    for (int k = 0;k<clusters_num;k++) {
+    for (int k = 0;k<clusters_num;++k) {
         aabb3d = aabb3ds->add_aabb3ds();
         obb3d = obb3ds->add_obb3ds();
         _pcformatconv.proto_pcl(clusters.clusters(k),*cloud_cluster);

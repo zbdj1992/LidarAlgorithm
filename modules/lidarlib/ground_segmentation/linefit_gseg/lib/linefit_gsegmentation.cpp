@@ -25,6 +25,12 @@ bool GroundSegmentation::load_conf(const std::string& file_path)
     YAML::Node parma_node = readyaml.load_conf(file_path);
     int ret = 0;
     double d_value = 0.0;
+    ret = readyaml.parse_yaml(parma_node,"use_thread_pool",this->_conf_use_thread_pool,0);
+    if (ret == RET_ERROR){
+        LOG(FATAL)<<"use_thread_pool conf failed!";
+    }else{
+        LOG(INFO)<<"use_thread_pool = "<<this->_conf_n_threads;
+    }
     ret = readyaml.parse_yaml(parma_node,"n_threads",this->_conf_n_threads,4);
     if (ret == RET_ERROR){
         LOG(FATAL)<<"n_threads conf failed!";
@@ -112,6 +118,12 @@ bool GroundSegmentation::load_conf(const std::string& file_path)
     }else{
         LOG(INFO)<<"k_margin = "<<_conf_segment_params._k_margin;
     }
+    readyaml.parse_yaml(parma_node,"use_debug_log",_conf_use_debug_log,0);
+    if (ret == RET_ERROR){
+        LOG(FATAL)<<"use_debug_log conf failed!";
+    }else{
+        LOG(INFO)<<"use_debug_log = "<<_conf_use_debug_log;
+    }
     return true;
 }
 bool GroundSegmentation::init()
@@ -136,21 +148,35 @@ bool GroundSegmentation::segment(const PointCloud& cloud, std::vector<int>* segm
     if (cloud.empty()) {
         return false;
     }
-    LOG(WARNING)<<" cloud size: "<<cloud.size();
+    if (_conf_use_debug_log) {
+        LOG(WARNING)<<" cloud size: "<<cloud.size();
+    }
     common::time::Timer proc_insert_timer;
     segmentation->resize(cloud.size(), 0);
     bin_index_.resize(cloud.size());
     segment_coordinates_.resize(cloud.size());
     insert_points(cloud);
-    LOG(ERROR)<< "insert points Took "<< proc_insert_timer.elapsed()<< "ms\n";
+    if (_conf_use_debug_log) {
+        LOG(ERROR)<< "insert points Took "<< proc_insert_timer.elapsed()<< "ms\n";
+    }
     common::time::Timer proc_get_lines_timer;
-//    linefit();
-    linefit_task(0,_conf_n_segments - 1,this);
-    LOG(ERROR)<< "get lines Took "<< proc_get_lines_timer.elapsed()<< "ms\n";
+    if (_conf_use_thread_pool) {
+        linefit();
+    }else{
+        linefit_task(0,_conf_n_segments - 1,this);
+    }
+    if (_conf_use_debug_log) {
+        LOG(ERROR)<< "get lines Took "<< proc_get_lines_timer.elapsed()<< "ms\n";
+    }
     common::time::Timer proc_assign_cluster_timer;
-    assigncluster_task(0,cloud.size()-1,segmentation,this);
-    //assign_cluster(segmentation);
-    LOG(ERROR)<< "assign cluster Took "<< proc_assign_cluster_timer.elapsed()<< "ms\n";
+    if (_conf_use_thread_pool) {
+        assign_cluster(segmentation);
+    }else{
+        assigncluster_task(0,cloud.size()-1,segmentation,this);
+    }
+    if (_conf_use_debug_log) {
+        LOG(ERROR)<< "assign cluster Took "<< proc_assign_cluster_timer.elapsed()<< "ms\n";
+    }
     return true;
 }
 void linefit_task(const size_t start,const size_t end,GroundSegmentation* gseg_obj)

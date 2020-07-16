@@ -1,4 +1,4 @@
-ec_cluster_tolerence : 0.1
+ec_cluster_tolerence : 0.3
 ec_cluster_min_size : 5
 ec_cluster_max_size : 5000
 use_cluster_merge : 1

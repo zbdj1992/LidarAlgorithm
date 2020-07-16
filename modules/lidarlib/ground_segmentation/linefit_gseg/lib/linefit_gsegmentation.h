@@ -44,6 +44,7 @@ private:
     boost::threadpool::pool _proc_pool;
 private:
     bool load_conf(const std::string& file_path);
+    int _conf_use_thread_pool;
     // Number of threads.
     int _conf_n_threads;
     // Minimum range of segmentation.
@@ -58,6 +59,7 @@ private:
     double _conf_max_dist_to_line;
     // How far to search for a line in angular direction [rad].
     double _conf_line_search_angle;
+    int _conf_use_debug_log;
     SegmentParams _conf_segment_params;
 private:
     bool td_equal(const double a,const double b);

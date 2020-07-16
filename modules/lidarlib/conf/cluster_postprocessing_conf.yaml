@@ -1,4 +1,4 @@
-cluster_merge_thrx : 0.5
-cluster_merge_thry : 0.5
+cluster_merge_thrx : 0.2
+cluster_merge_thry : 0.2
 cluster_merge_thry : 1.0
 use_log_debug : 1
